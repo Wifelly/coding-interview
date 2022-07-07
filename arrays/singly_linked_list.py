@@ -1,15 +1,15 @@
 from typing import Any
 
 
-class LinkedNode:
+class SinglyLinkedNode:
     def __init__(self, data: Any):
         self.value = data
         self.next = None
 
 
-class LinkedList:
+class SinglyLinkedList:
     def __init__(self):
-        self.head: LinkedNode | None = None
+        self.head: SinglyLinkedNode | None = None
         self._size: int = 0
 
     def size(self) -> int:
@@ -26,8 +26,8 @@ class LinkedList:
             current = current.next
         return current.value
 
-    def push_front(self, value: Any) -> 'LinkedList':
-        new_node = LinkedNode(value)
+    def push_front(self, value: Any) -> 'SinglyLinkedList':
+        new_node = SinglyLinkedNode(value)
         new_node.next = self.head
         self.head = new_node
         self._size += 1
@@ -41,8 +41,8 @@ class LinkedList:
         self._size -= 1
         return value
 
-    def push_back(self, value: Any) -> 'LinkedList':
-        new_node = LinkedNode(value)
+    def push_back(self, value: Any) -> 'SinglyLinkedList':
+        new_node = SinglyLinkedNode(value)
         if self.is_empty():
             self.head = new_node
         else:
@@ -77,10 +77,10 @@ class LinkedList:
             current = current.next
         return current.value
 
-    def insert(self, index: int, value: Any) -> 'LinkedList':
+    def insert(self, index: int, value: Any) -> 'SinglyLinkedList':
         if index < 0 or index > self._size:
             raise IndexError
-        new_node = LinkedNode(value)
+        new_node = SinglyLinkedNode(value)
         if index == 0:
             new_node.next = self.head
             self.head = new_node
@@ -93,7 +93,7 @@ class LinkedList:
         self._size += 1
         return self
 
-    def erase(self, index: int) -> 'LinkedList':
+    def erase(self, index: int) -> 'SinglyLinkedList':
         if index < 0 or index >= self._size:
             raise IndexError
         if index == 0:
@@ -115,7 +115,7 @@ class LinkedList:
         return current.value
 
     # noinspection PyShadowingBuiltins
-    def reverse(self) -> 'LinkedList':
+    def reverse(self) -> 'SinglyLinkedList':
         current = self.head
         prev = None
         while current is not None:
@@ -126,7 +126,7 @@ class LinkedList:
         self.head = prev
         return self
 
-    def remove_value(self, value: Any) -> 'LinkedList':
+    def remove_value(self, value: Any) -> 'SinglyLinkedList':
         if self.is_empty():
             raise IndexError
         if self.head.value == value:
@@ -148,20 +148,3 @@ class LinkedList:
             s += str(current.value) + ' '
             current = current.next
         return s
-
-
-class LinkedTailedList:
-    def __init__(self):
-        self.head: LinkedNode | None = None
-        self.tail: LinkedNode | None = None
-        self._size: int = 0
-
-    def size(self) -> int:
-        return self._size
-
-    def is_empty(self) -> bool:
-        return self._size == 0
-
-
-
-
