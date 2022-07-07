@@ -56,11 +56,15 @@ class SinglyLinkedList:
     def pop_back(self) -> Any:
         if self.is_empty():
             raise IndexError
-        current = self.head
-        while current.next.next is not None:
-            current = current.next
-        value = current.next.value
-        current.next = None
+        if self._size == 1:
+            value = self.head.value
+            self.head = None
+        else:
+            current = self.head
+            while current.next.next is not None:
+                current = current.next
+            value = current.next.value
+            current.next = None
         self._size -= 1
         return value
 
